@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -10,4 +10,14 @@ export class AppController {
   root() {
     return this.appService.getHello();
   }
+  
+  @Get('/init')
+  async init(
+    @Query('user') user: string,
+    @Query('userVal') userVal: string,
+  ): Promise<string> {
+    return this.appService.init(user, userVal);
+  }
+
+  
 }
