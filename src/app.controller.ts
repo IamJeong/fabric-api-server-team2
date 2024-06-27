@@ -1,9 +1,14 @@
 import { Controller, Get, Query, Post, Render, Body } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ProductsService } from './products/products.service';
+import { Product } from './products/entities/product.entity';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly ProductsService: ProductsService
+  ) {}
 
   @Get()
   getHello(): string {
@@ -46,5 +51,10 @@ export class AppController {
     @Query('name') name: string,
   ): Promise<string> {
     return this.appService.delete(name);
+  }
+  
+  @Post('/create')
+  async create(@Body() product: Product): Promise<Product> {
+    return this.ProductsService.create(product);
   }
 }
