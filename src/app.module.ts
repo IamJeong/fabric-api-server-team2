@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/entities/product.entity';
 import { ProductsService  } from './products/products.service';
+import { UsersService } from './Users/users.service';
+import { User } from './Users/entities/user.entity';
 
 @Module({
   imports: [
@@ -12,14 +14,15 @@ import { ProductsService  } from './products/products.service';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'WJDtprl0328!',
-    database: 'blockchaindb',
-    entities: [Product],
+    password: 'yourpassword',
+    database: 'blockchainDB',
+    entities: [Product, User],
     synchronize: true, 
+    dropSchema: true
   }),
-  TypeOrmModule.forFeature([Product]),
+  TypeOrmModule.forFeature([Product, User]),
 ],
   controllers: [AppController],
-  providers: [AppService, ProductsService],
+  providers: [AppService, ProductsService, UsersService],
 })
 export class AppModule {}
