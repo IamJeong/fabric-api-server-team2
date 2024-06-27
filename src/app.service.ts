@@ -4,7 +4,11 @@ import { send } from './util/connectFabric';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!';
+    return 'hello world';
+  } 
+
+  getJoin(): string {
+    return "여기는 회원가입 페이지입니다"
   }
 
   async init(user:string, userval:string) {

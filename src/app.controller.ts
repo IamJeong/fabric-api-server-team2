@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Post, Render, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -9,13 +9,20 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  
+  @Get('/signup')
+  @Render('signup')
+  showSignupPage() {
+    return;
+  }
 
-  @Get('/init')
-  async init(
-    @Query('user') user: string,
-    @Query('userval') userval: string,
+  @Post('/signup')
+  async handleSignup(
+    @Body('username') username: string,
+    @Body('userval') userval: string,
   ): Promise<string> {
-    return this.appService.init(user, userval);
+    await this.appService.init(username, userval);
+    return 'Signup successful!';
   }
 
   @Get('/invoke')
