@@ -27,12 +27,6 @@ export class AppController {
     return;
   }
 
-  @Get('/charge')
-  @Render('charge')
-  showChargePage() {
-    return;
-  }
-
   @Post('/signup')
   async handleSignup(
     @Body('userid') userid: string,
@@ -48,7 +42,7 @@ export class AppController {
     res.redirect(`/`); // 회원가입 후 리다이렉션할 페이지 경로
   }
 
-  @Get('./init')
+  @Get('/init')
   async init(
     @Query('user') user: string,
     @Query('userval') userval: string
@@ -104,5 +98,47 @@ export class AppController {
       res.redirect(`/login`);
     }
   }
+
+  @Get('/charge')
+  async charge(
+    @Query('user') user: string,
+    @Query('amount') amount: string,
+  ): Promise<string> {
+    return this.appService.charge(user, amount);
+  }
+
+
+  @Get('/initItem')
+  async initItem(
+    @Query('itemName') itemName: string,
+    @Query('styleNum') styleNum: string,
+    @Query('brand') brand: string,
+    @Query('inventory') inventory: string,
+  ): Promise<string> {
+    return this.appService.initItem(itemName, styleNum, brand, inventory);
+  }
+
+  @Get('/purchaseItem')
+  async purchaseItem(
+    @Query('user') user: string,
+    @Query('itemId') itemId: string,
+  ): Promise<string> {
+    return this.appService.purchaseItem(user, itemId);
+  }
+
+  @Get('/queryItem')
+  async queryItem(
+    @Query('itemId') itemId: string,
+  ): Promise<string> {
+    return this.appService.queryItem(itemId);
+  }
+
+  @Get('/queryPurchase')
+  async queryPurchase(
+    @Query('user') user: string,
+  ): Promise<string> {
+    return this.appService.queryPurchase(user);
+  }
+
 
 }

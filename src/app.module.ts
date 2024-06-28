@@ -14,7 +14,7 @@ import { User } from './Users/entities/user.entity';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'yourpassword',
+    password: 'root1234',
     database: 'blockchainDB',
     entities: [Product, User],
     synchronize: true, 
